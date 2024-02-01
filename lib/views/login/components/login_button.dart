@@ -1,5 +1,5 @@
-// login_button.dart
 import 'package:flutter/material.dart';
+import 'package:first_test_case/utils/constants.dart';
 
 class LoginButton extends StatelessWidget {
   final bool isLoading;
@@ -24,7 +24,7 @@ class LoginButton extends StatelessWidget {
                 color: Colors.white,
               ),
             )
-          : const Text("Login"),
+          : const Text(loginButtonText),
     );
   }
 }

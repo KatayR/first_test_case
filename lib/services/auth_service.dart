@@ -1,13 +1,13 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:http/http.dart' as http;
 import '../models/user.dart';
+import 'package:first_test_case/utils/constants.dart';
 
 class AuthService {
   Future<User?> login(String email, String password) async {
     try {
       final response = await http.post(
-        Uri.parse('https://reqres.in/api/login'),
+        Uri.parse(loginEndpoint),
         body: {'email': email, 'password': password},
       );
       if (response.statusCode == 200) {
@@ -17,7 +17,7 @@ class AuthService {
         return null;
       }
     } catch (e) {
-      return Future.error(e.toString());
+      return Future.error(loginErrorMessage);
     }
   }
 }

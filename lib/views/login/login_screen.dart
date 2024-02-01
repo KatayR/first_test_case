@@ -1,9 +1,10 @@
 import 'package:first_test_case/providers/auth_provider.dart';
 import 'package:first_test_case/views/login/components/formfields.dart';
 import 'package:first_test_case/views/login/components/login_button.dart';
+import 'package:first_test_case/views/participants/participants_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:first_test_case/utils/constants.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -32,16 +33,17 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
         final authController = ref.read(authControllerProvider);
         final user = await authController.login(email, password);
         if (user != null) {
-          Navigator.restorablePushReplacementNamed(context, '/participants');
+          Navigator.restorablePushReplacementNamed(
+              context, ParticipantsScreen.routeName);
         } else
           ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Invalid credentials')));
+              .showSnackBar(SnackBar(content: Text(invalidCredentialsMessage)));
       } catch (error) {
         if (mounted) {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                title: const Text("error"),
+                title: const Text(errorTitle),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -51,7 +53,7 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Text("close"),
+                      child: const Text(closeButtonText),
                     )
                   ],
                 )),
@@ -76,6 +78,7 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
           child: Form(
               key: formKey,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   EmailFormField(onSaved: (value) => email = value!.trim()),
                   const SizedBox(height: 16),

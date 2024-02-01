@@ -1,4 +1,3 @@
-// participant_tile.dart
 import 'package:flutter/material.dart';
 import 'package:first_test_case/models/participant.dart';
 

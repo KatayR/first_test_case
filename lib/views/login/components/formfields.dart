@@ -1,5 +1,6 @@
-// formfields.dart
 import 'package:flutter/material.dart';
+import '../../../utils/validators.dart';
+import 'package:first_test_case/utils/constants.dart';
 
 class EmailFormField extends StatelessWidget {
   final Function(String?) onSaved;
@@ -12,9 +13,10 @@ class EmailFormField extends StatelessWidget {
       autofocus: true,
       decoration: const InputDecoration(
         icon: Icon(Icons.email),
-        labelText: "email",
+        labelText: emailLabelText,
         border: UnderlineInputBorder(),
       ),
+      validator: emailValidator,
       keyboardType: TextInputType.emailAddress,
       onSaved: onSaved,
     );
@@ -32,9 +34,10 @@ class PasswordFormField extends StatelessWidget {
       obscureText: true,
       decoration: const InputDecoration(
         icon: Icon(Icons.lock),
-        labelText: "password",
+        labelText: passwordLabelText,
         border: UnderlineInputBorder(),
       ),
+      validator: passwordValidator,
       onSaved: onSaved,
     );
   }

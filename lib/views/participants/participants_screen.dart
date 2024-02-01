@@ -1,8 +1,8 @@
-// participants_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:first_test_case/views/participants/components/participant_list.dart';
 import '../../providers/participants_provider.dart';
+import 'package:first_test_case/utils/constants.dart';
 
 class ParticipantsScreen extends ConsumerWidget {
   static const String routeName = '/participants';
@@ -16,7 +16,7 @@ class ParticipantsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Participants'),
+        title: const Text(participantsTitle),
       ),
       body: asyncValue.when(
         data: (participants) => ParticipantList(participants: participants),
