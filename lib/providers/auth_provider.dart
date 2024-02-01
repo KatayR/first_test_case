@@ -5,4 +5,4 @@ import 'package:first_test_case/services/auth_service.dart';
 final authServiceProvider = Provider<AuthService>((ref) => AuthService());
 
 final authControllerProvider = Provider<AuthController>(
-    (ref) => AuthController(ref.read(authServiceProvider)));
+    (ref) => AuthController(ref.read(authServiceProvider), ref));
