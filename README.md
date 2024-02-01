@@ -11,11 +11,13 @@ This Test Case App is a mobile application built with Flutter and Dart, utilizin
 - **Error Handling**: The app handles potential errors gracefully, including network errors and invalid login attempts.
 
 ## Architecture
-The app follows a modified MVC (Model-View-Controller) architecture:
+The app follows an MVC+S (Model-View-Controller + Services) architecture:
 - **Model**: Represents the data structure (User and Participant models).
 - **View**: Flutter widgets that render the UI (Login and Participants screens).
-- **Controller**: Business logic (AuthController and ParticipantsController).
-- **Providers**: Riverpod providers for managing and accessing state.
+- **Controller**: Business logic handlers (AuthController and ParticipantsController).
+- **Services**: Separate layer handling external interactions like API calls (ParticipantService and AuthService).
+- **Providers**: Riverpod providers for state management and dependency injection.
+
 
 ## Project Structure
 - `lib/main.dart`: The entry point of the application.
