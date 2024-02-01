@@ -11,18 +11,22 @@ class ParticipantsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncValue = ref.watch(participantsProvider);
+    final participants = ref.watch(participantsProvider);
+
+    if (participants.isEmpty) {
+      ref.read(participantsProvider.notifier).fetchParticipants();
+    }
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(participantsTitle),
       ),
-      body: asyncValue.when(
-        data: (participants) => ParticipantList(participants: participants),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => Text('Error: $error'),
-      ),
+      body: participants.isNotEmpty
+          ? ParticipantList(participants: participants)
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 }

@@ -1,15 +1,13 @@
+import 'package:first_test_case/models/participant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../controllers/participants_controller.dart';
 import '../services/participant_service.dart';
+import 'participants_state_notifier.dart';
 
 final participantServiceProvider = Provider<ParticipantService>((ref) {
   return ParticipantService();
 });
 
-final participantsControllerProvider = Provider<ParticipantsController>((ref) {
-  return ParticipantsController(ref.read(participantServiceProvider));
-});
-
-final participantsProvider = FutureProvider((ref) async {
-  return ref.read(participantsControllerProvider).fetchParticipants();
+final participantsProvider =
+    StateNotifierProvider<ParticipantsStateNotifier, List<Participant>>((ref) {
+  return ParticipantsStateNotifier(ref.read(participantServiceProvider));
 });
